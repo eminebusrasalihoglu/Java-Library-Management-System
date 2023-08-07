@@ -1,11 +1,25 @@
 package Library;
 
 import java.util.ArrayList;
-
+import java.io.File;
 public class Database {
 
-    ArrayList<User> users = new ArrayList<User>();
-    ArrayList<String> userNames = new ArrayList<String>();
+    private ArrayList<User> users = new ArrayList<User>();
+    private ArrayList<String> userNames = new ArrayList<String>();
+    private ArrayList<Book> books = new ArrayList<Book>();
+    private ArrayList<String> bookNames = new ArrayList<String>();
+
+    private File usersFile = new File(Main.class.getClassLoader().getResource("data\\Users").getFile());
+    private File booksFile = new File(Main.class.getClassLoader().getResource("data\\Books").getFile());
+
+    public Database(){
+        if(!usersFile.exists()){
+            usersFile.mkdirs();
+        }
+        if(!booksFile.exists()){
+            booksFile.mkdirs();
+        }
+    }
 
     public void addUser(User u) {
         users.add(u);
@@ -27,4 +41,8 @@ public class Database {
         return users.get(n);
     }
 
+    public void addBook(Book book){
+        books.add(book);
+        bookNames.add(book.getName());
+    }
 }

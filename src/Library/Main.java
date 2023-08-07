@@ -33,7 +33,7 @@ public class Main {
         int n = database.login(phoneNumber, email);
         if( n != -1) {
             User user = database.getUser(n);
-            user.menu();
+            user.menu(database, user);
         }else {
             System.out.println("User doesn't exist");
         }
@@ -59,8 +59,9 @@ public class Main {
             user = new NormalUser(name, email, phoneNumber);
         }
         database.addUser(user);
-        user.menu();
         System.out.println("User created successfully!");
+        user.menu(database, user);
+
 
     }
 
