@@ -22,10 +22,11 @@ public class AddBook implements IOOperation {
         book.setPrice(s.nextDouble());
         System.out.println("Enter borrowing copies: ");
         book.setBrwcopies(s.nextInt());
-        s.close();
         database.addBook(book);
 
         System.out.println("Book added successfully");
+
+        user.menu(database, user);
 
 
 

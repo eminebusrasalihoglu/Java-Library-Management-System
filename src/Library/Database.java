@@ -72,7 +72,7 @@ public class Database {
             System.err.println(e.toString());
         }
         if(!text1.matches("" ) || !text1.isEmpty()){
-            String[] a1 = text1.split("<NewUser/>\n");
+            String[] a1 = text1.split("<NewUser/>");
             for(String s : a1){
                 String[] a2 = s.split("<N/>");
                 if(a2[3].matches("Admin")){
