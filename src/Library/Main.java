@@ -34,7 +34,7 @@ public class Main {
         if( n != -1) {
             User user = database.getUser(n);
             user.menu(database, user);
-        }else {
+        }else { 
             System.out.println("User doesn't exist");
         }
 

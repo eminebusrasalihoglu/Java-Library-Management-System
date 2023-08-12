@@ -27,5 +27,7 @@ public abstract class User {
         return phoneNumber;
     }
 
+    abstract public String toString();
+
     abstract public void menu(Database database, User user);
 }
