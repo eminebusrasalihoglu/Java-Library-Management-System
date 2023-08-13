@@ -31,6 +31,7 @@ public class Database {
             }catch(Exception e){}
         }
         getUsers();
+        getBooks();
     }
 
     public void addUser(User u) {
@@ -127,7 +128,7 @@ public class Database {
             System.err.println(e.toString());
         }
         if(!text1.matches("") || !text1.isEmpty()){
-            String[] a1 = text1.split("<NewBook/>\n");
+            String[] a1 = text1.split("<NewBook/>");
             for(String s : a1){
               Book book = parseBook(s);
               books.add(book);
@@ -148,5 +149,27 @@ public class Database {
         book.setBrwcopies(Integer.parseInt(a[6]));
         return book;
     }
+    public ArrayList<Book> getAllBooks(){
+        return books;
+    }
 
+    public int getBook(String bookName){
+        int i = -1;
+        for(Book book: books){
+                if(book.getName().matches(bookName)){
+                    i = books.indexOf(book);
+                }
+
+            }
+            return i;
+        }
+    public Book getBook(int i){
+
+        return books.get(i);
+    }
+    public void deleteBook(int i){
+        books.remove(i);
+        bookNames.remove(i);
+        saveBooks();
+    }
 }

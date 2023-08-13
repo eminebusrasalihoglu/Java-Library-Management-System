@@ -22,13 +22,13 @@ public class Book {
     }
 
     public String toString(){
-        String text = "Book Name: " + name +
-                "Book Author: " + author +
-                "Book Publisher: " + publisher +
-                "Book Collection Address: "+ address+
-                "Qty: "+ String.valueOf(qty)+
-                "Price: "+ String.valueOf(price)+
-                "Borrowing Coppies: "+ String.valueOf(brwcopies);
+        String text = "Book Name: " + name +"\n"+
+                "Book Author: " + author +"\n"+
+                "Book Publisher: " + publisher +"\n"+
+                "Book Collection Address: "+ address+"\n"+
+                "Qty: "+ String.valueOf(qty)+"\n"+
+                "Price: "+ String.valueOf(price)+"\n"+
+                "Borrowing Coppies: "+ String.valueOf(brwcopies)+"\n";
 
         return text;
     }
