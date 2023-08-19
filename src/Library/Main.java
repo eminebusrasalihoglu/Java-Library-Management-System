@@ -12,17 +12,13 @@ public class Main {
 
         System.out.println("Welcome to Library Management System!\n");
         int choice;
-        //do {
             System.out.println("0. Exit\n1. Login \n2. New User\n");
             s = new Scanner(System.in);
             choice = s.nextInt();
-
             switch(choice) {
                 case 1: login(); break;
                 case 2: newUser(); break;
             }
-       // }while(choice != 0);
-
     }
 
     private static void login() {
