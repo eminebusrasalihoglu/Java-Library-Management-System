@@ -11,9 +11,11 @@ public class Database {
     private ArrayList<String> userNames = new ArrayList<String>();
     private ArrayList<Book> books = new ArrayList<Book>();
     private ArrayList<String> bookNames = new ArrayList<String>();
+    private ArrayList<Order> orders = new ArrayList<Order>();
 
     private File usersFile = new File("C:\\Users\\busra\\Desktop\\Java-Library-Management-System\\src\\data\\Users");
     private File booksFile = new File("C:\\Users\\busra\\Desktop\\Java-Library-Management-System\\src\\data\\Books");
+    private File ordersFile = new File("C:\\Users\\busra\\Desktop\\Java-Library-Management-System\\src\\data\\Orders");
     private File folder = new File("C:\\Users\\busra\\Desktop\\Java-Library-Management-System\\src\\data");
 
     public Database(){
@@ -30,8 +32,14 @@ public class Database {
                 booksFile.createNewFile();
             }catch(Exception e){}
         }
+        if(!ordersFile.exists()){
+            try{
+                ordersFile.createNewFile();
+            }catch(Exception e){}
+        }
         getUsers();
         getBooks();
+        getOrders();
     }
 
     public void addUser(User u) {
@@ -171,5 +179,82 @@ public class Database {
         books.remove(i);
         bookNames.remove(i);
         saveBooks();
+    }
+    public void deleteAllData(){
+        if(usersFile.exists()){
+            try{
+                usersFile.delete();
+            }catch(Exception e){}
+        }
+        if(booksFile.exists()){
+            try{
+                booksFile.delete();
+            }catch(Exception e){}
+        }
+        if(ordersFile.exists()){
+            try{
+                ordersFile.delete();
+            }catch(Exception e){}
+        }
+    }
+    public void addOrder(Order order, Book book, int bookIndex){
+        orders.add(order);
+        books.set(bookIndex,book);
+        saveOrders();
+        saveBooks();
+    }
+    private void saveOrders(){
+        String text1 = "";
+        for(Order order : orders){
+            text1 = text1 + order.toString2()+"<NewOrder/>\n";
+        }
+        try{
+            PrintWriter pw = new PrintWriter(ordersFile);
+            pw.print(text1);
+            pw.close();
+        }catch (Exception e){
+            System.err.println(e.toString());
+        }
+    }
+
+    private void getOrders(){
+        String text1 = "";
+        try{
+            BufferedReader br1 = new BufferedReader(new FileReader(ordersFile));
+            String s1;
+            while((s1 = br1.readLine()) != null ){
+                text1 = text1 + s1;
+            }
+            br1.close();
+        } catch(Exception e){
+            System.err.println(e.toString());
+        }
+        if(!text1.matches("") || !text1.isEmpty()){
+            String[] a1 = text1.split("<NewOrder/>");
+            for(String s : a1){
+                Order order = parseOrder(s);
+                orders.add(order);
+            }
+        }
+    }
+
+    private  User getUserByName(String name){
+        User u = new NormalUser("");
+        for (User user : users){
+            if(user.getName().matches(name)){
+                u = user;
+                break;
+            }
+        }
+        return u;
+    }
+    private Order parseOrder(String s){
+     String[] a = s.split("<N/>");
+     Order order = new Order(books.get(getBook(a[0])), getUserByName(a[1]),
+             Double.parseDouble(a[2]),Integer.parseInt(a[3]));
+     return order;
+    }
+    public ArrayList<Order> getAllOrders(){
+        return orders;
     }
 }
