@@ -39,6 +39,10 @@ public class Main {
     private static void newUser() {
         System.out.println("Enter name : ");
         String name = s.next();
+        if(database.userExists(name)){
+            System.out.println("User exists!");
+            newUser();
+        }
         System.out.println("Enter phone number : ");
         String phoneNumber = s.next();
         System.out.println("Enter email : ");

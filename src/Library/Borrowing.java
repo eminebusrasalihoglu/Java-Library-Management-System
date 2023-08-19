@@ -16,7 +16,7 @@ public class Borrowing {
     public Borrowing(Book book, User user){
         start = LocalDate.now();
         finish = start.plusDays(14);
-        daysLeft = Period.between(start, finish).getDays();
+        daysLeft = Period.between(finish, LocalDate.now()).getDays();
         this.book = book;
         this.user = user;
     }
@@ -36,7 +36,7 @@ public class Borrowing {
         return formatter.format(finish);
     }
     public int getDaysleft(){
-        return Period.between(start, finish).getDays();
+        return Period.between(finish, LocalDate.now()).getDays();
     }
     public Book getBook(){
         return book;
